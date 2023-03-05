@@ -1,7 +1,7 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import * as dotenv from 'dotenv'
-import * as dynamoose from 'dynamoose';
+import dotenv from 'dotenv'
+import dynamoose from 'dynamoose';
 import { Item } from 'dynamoose/dist/Item';
 
 dotenv.config()
