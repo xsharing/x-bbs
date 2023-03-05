@@ -1,5 +1,10 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
+import * as dotenv from 'dotenv'
+import * as dynamoose from 'dynamoose';
+import { Item } from 'dynamoose/dist/Item';
+
+dotenv.config()
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -32,11 +37,27 @@ const books = [
     },
 ];
 
+
+dynamoose.aws.ddb.local("http://ddb:8000");
+
+class BookClass extends Item {
+  id: string
+  title: string
+  author: string
+}
+
+const BookModel = dynamoose.model<BookClass>("Book", {"id": String, "title": String, "author": String});
+const BookTable =  new dynamoose.Table("Book", [BookModel], { throughput: 'ON_DEMAND', create: true, waitForActive: true });
+
+BookModel.create({id: '1', title: 'a good book', author: 'John'}, {overwrite: true})
+
 // Resolvers define how to fetch the types defined in your schema.
 // This resolver retrieves books from the "books" array above.
 const resolvers = {
     Query: {
-        books: () => books,
+        books: async () => {
+          return await BookModel.scan().exec()
+        },
     },
 };
 
