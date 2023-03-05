@@ -41,9 +41,9 @@ const books = [
 dynamoose.aws.ddb.local("http://ddb:8000");
 
 class BookClass extends Item {
-  id: string
-  title: string
-  author: string
+  id!: string
+  title!: string
+  author!: string
 }
 
 const BookModel = dynamoose.model<BookClass>("Book", {"id": String, "title": String, "author": String});
