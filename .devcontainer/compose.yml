@@ -1,0 +1,14 @@
+version: '3.4'
+services:
+  backend:
+    container_name: x-bbs-backend
+    build:
+      context: ..
+      dockerfile: ./backend/.devcontainer/Dockerfile
+    command: /bin/sh -c "while :; do sleep 10; done"
+  frontend:
+    container_name: x-bbs-frontend
+    build:
+      context: ..
+      dockerfile: ./frontend/.devcontainer/Dockerfile
+    command: /bin/sh -c "while :; do sleep 10; done"

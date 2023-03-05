@@ -1,0 +1,12 @@
+{
+    "name": "x-bbs-backend",
+    "dockerComposeFile": "../../.devcontainer/compose.yml",
+    "service": "backend",
+    "runServices": ["backend"],
+    "remoteUser": "node",
+    "workspaceFolder": "/workspace/backend",
+    "overrideCommand": false,
+    "mounts": [
+        "source=../,target=/workspace,type=bind,consistency=cached"
+    ]
+}

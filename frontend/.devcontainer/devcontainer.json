@@ -1,0 +1,12 @@
+{
+    "name": "x-bbs-frontend",
+    "dockerComposeFile": "../../.devcontainer/compose.yml",
+    "service": "frontend",
+    "runServices": ["frontend"],
+    "remoteUser": "node",
+    "workspaceFolder": "/workspace/frontend",
+    "overrideCommand": false,
+    "mounts": [
+        "source=../,target=/workspace,type=bind,consistency=cached"
+    ]
+}
