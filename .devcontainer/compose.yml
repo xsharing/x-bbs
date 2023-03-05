@@ -1,5 +1,10 @@
 version: '3.4'
 services:
+  ddb:
+    container_name: x-bbs-ddb
+    image: amazon/dynamodb-local
+    ports:
+      - 8000:8000
   backend:
     container_name: x-bbs-backend
     build:

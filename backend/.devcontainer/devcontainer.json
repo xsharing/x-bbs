@@ -2,7 +2,7 @@
     "name": "x-bbs-backend",
     "dockerComposeFile": "../../.devcontainer/compose.yml",
     "service": "backend",
-    "runServices": ["backend"],
+    "runServices": ["backend", "ddb"],
     "remoteUser": "node",
     "workspaceFolder": "/workspace/backend",
     "overrideCommand": false,
