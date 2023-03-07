@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-import { encodeGlobalID } from '@pothos/plugin-relay';
 import { ThreadModel } from '../models';
 import { CommentModel } from '../models/comment';
 

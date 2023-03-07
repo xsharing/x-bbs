@@ -3,7 +3,7 @@ import { ThreadTable } from '../models';
 import { ResourceInUseException } from '@aws-sdk/client-dynamodb';
 import { type Table } from 'dynamoose/dist/Table';
 import { CommentTable } from '../models/comment';
-import dynamoose from 'dynamoose';
+// import dynamoose from 'dynamoose';
 
 dotenv.config();
 
