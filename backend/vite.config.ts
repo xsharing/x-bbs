@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [
     ...VitePluginNode({
       adapter: 'express',
-      appPath: './src/pothos-app.ts',
+      appPath: './src/app.ts',
       exportName: 'viteNodeApp',
       tsCompiler: 'swc',
     }),

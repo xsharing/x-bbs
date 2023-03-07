@@ -13,6 +13,6 @@ export const ThreadModel = dynamoose.model<ThreadItem>('Thread', {
 
 export const ThreadTable = new dynamoose.Table('Thread', [ThreadModel], {
   throughput: 'ON_DEMAND',
-  create: true, // TODO: if only dev
-  waitForActive: true, // TODO: if only dev
+  create: false,
+  waitForActive: false,
 });
