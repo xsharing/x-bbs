@@ -1,12 +1,28 @@
 {
-    "name": "x-bbs-frontend",
-    "dockerComposeFile": "../../.devcontainer/compose.yml",
-    "service": "frontend",
-    "runServices": ["frontend"],
-    "remoteUser": "node",
-    "workspaceFolder": "/workspace/frontend",
-    "overrideCommand": false,
-    "mounts": [
-        "source=../,target=/workspace,type=bind,consistency=cached"
-    ]
+  "name": "x-bbs-frontend",
+  "dockerComposeFile": "../../.devcontainer/compose.yml",
+  "service": "frontend",
+  "runServices": ["frontend"],
+  "remoteUser": "node",
+  "workspaceFolder": "/workspace/frontend",
+  "overrideCommand": false,
+  "mounts": [
+    "source=../,target=/workspace,type=bind,consistency=cached",
+    "target=${containerWorkspaceFolder}/node_modules,type=volume"
+  ],
+  "onCreateCommand": "chown node node_modules",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "Tyriar.sort-lines",
+        "eamodio.gitlens",
+        "mhutchie.git-graph",
+        "GitHub.copilot",
+        "kisstkondoros.vscode-codemetrics",
+        "streetsidesoftware.code-spell-checker",
+        "rbbit.typescript-hero"
+      ]
+    }
+  }
 }
