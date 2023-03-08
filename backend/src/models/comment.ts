@@ -26,7 +26,10 @@ export class CommentItem extends Item {
 
 export const CommentModel = dynamoose.model<CommentItem>('Comment', {
   id: String,
-  threadId: String,
+  threadId: {
+    type: String,
+    index: true,
+  },
   body: String,
   authorId: String,
 });

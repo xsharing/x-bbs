@@ -12,7 +12,7 @@ export const AccountType = builder.loadableNode(AccountObject, {
     name: t.exposeString('name'),
   }),
   async load(ids) {
-    console.log('loadOne', ids);
+    console.log('load accounts', ids);
     return (await AccountModel.batchGet(ids)).map((r) => new AccountObject(r));
   },
   loaderOptions: {

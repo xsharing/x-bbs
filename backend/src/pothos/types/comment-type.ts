@@ -1,4 +1,5 @@
 import { encodeGlobalID } from '@pothos/plugin-relay';
+import { AccountObject } from '../../models/account';
 import { CommentModel, CommentObject } from '../../models/comment';
 import { builder } from '../builder';
 import { AccountType } from './account-types';
@@ -14,16 +15,17 @@ export const CommentType = builder.loadableNode(CommentObject, {
       resolve: (parent) => encodeGlobalID('Thread', parent.threadId),
     }),
     body: t.exposeString('body'),
-    author: t.field({
+    author: t.loadable({
       type: AccountType,
-
-      resolve: async (parent, _, context) => {
-        return await AccountType.getDataloader(context).load(parent.authorId);
+      load: async (keys: string[], context) => {
+        return await AccountType.getDataloader(context).loadMany(keys);
       },
+      sort: (obj) => (typeof obj === 'string' ? obj : obj.id),
+      resolve: (parent) => parent.authorId,
     }),
   }),
   async load(ids) {
-    console.log('loadOne', ids);
+    console.log('load comments', ids);
     return await CommentModel.batchGet(ids);
   },
   loaderOptions: {
