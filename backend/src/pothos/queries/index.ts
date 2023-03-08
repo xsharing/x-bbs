@@ -1,1 +1,1 @@
-export * from './thread-query'
+export * from './thread-query';

@@ -1,12 +1,12 @@
 import { defineConfig } from 'vite';
 import { VitePluginNode } from 'vite-plugin-node';
-import ViteRestart from 'vite-plugin-restart'
+import ViteRestart from 'vite-plugin-restart';
 
 export default defineConfig({
   appType: 'custom',
   server: {
     port: 4002,
-    hmr: true
+    hmr: true,
   },
   plugins: [
     ...VitePluginNode({
@@ -17,10 +17,8 @@ export default defineConfig({
     }),
     // pothos schema builder has problem with reload(registering same type)
     ViteRestart({
-      restart: [
-        'src/**/*.ts',
-      ]
-    })
+      restart: ['src/**/*.ts'],
+    }),
   ],
   optimizeDeps: {
     exclude: [],

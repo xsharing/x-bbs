@@ -1,11 +1,10 @@
-import { builder } from "../builder";
+import { builder } from '../builder';
 
 builder.queryType({
-    fields: (t) => ({
-      // threads: t.field({
-      //   type: [ThreadType],
-      //   resolve: async () => await ThreadModel.scan().exec(),
-      // }),
-    }),
-  });
-  
+  fields: (t) => ({
+    // threads: t.field({
+    //   type: [ThreadType],
+    //   resolve: async () => await ThreadModel.scan().exec(),
+    // }),
+  }),
+});

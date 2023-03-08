@@ -1,14 +1,13 @@
 import dynamoose from 'dynamoose';
 import { Item } from 'dynamoose/dist/Item';
 
-
-export class AccountObject  {
+export class AccountObject {
   id!: string;
   name!: string;
   constructor(item?: AccountItem) {
-    if (item!=null) {
-        this.id = item.id;
-        this.name = item.name;
+    if (item != null) {
+      this.id = item.id;
+      this.name = item.name;
     }
   }
 }

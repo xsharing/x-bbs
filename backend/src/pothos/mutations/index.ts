@@ -1,2 +1,2 @@
-import './mutation'
-import './thread-mutation'
+import './mutation';
+import './thread-mutation';

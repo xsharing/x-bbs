@@ -1,3 +1,3 @@
-import { builder } from "../builder";
+import { builder } from '../builder';
 
-builder.mutationType({fields: ()=> ({})})
+builder.mutationType({ fields: () => ({}) });

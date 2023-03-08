@@ -1,15 +1,14 @@
 import dynamoose from 'dynamoose';
 import { Item } from 'dynamoose/dist/Item';
 
-
-export class CommentObject  {
+export class CommentObject {
   id!: string;
   threadId!: string;
   body!: string;
   authorId!: string;
 
   constructor(item?: CommentItem) {
-    if (item!=null) {
+    if (item != null) {
       this.id = item.id;
       this.threadId = item.threadId;
       this.body = item.body;

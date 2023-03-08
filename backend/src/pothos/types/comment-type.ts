@@ -16,11 +16,11 @@ export const CommentType = builder.loadableNode(CommentObject, {
     body: t.exposeString('body'),
     author: t.field({
       type: AccountType,
-      
-      resolve: async (parent, _ ,context) => {
-        return await AccountType.getDataloader(context).load(parent.authorId)
-      }
-    })
+
+      resolve: async (parent, _, context) => {
+        return await AccountType.getDataloader(context).load(parent.authorId);
+      },
+    }),
   }),
   async load(ids) {
     console.log('loadOne', ids);
@@ -29,5 +29,5 @@ export const CommentType = builder.loadableNode(CommentObject, {
   loaderOptions: {
     maxBatchSize: 100,
   },
-  sort: obj => obj.id,
+  sort: (obj) => obj.id,
 });

@@ -2,7 +2,6 @@ import { encodeGlobalID } from '@pothos/plugin-relay';
 import { builder } from '../builder';
 import { AccountModel, AccountObject } from '../../models/account';
 
-
 export const AccountType = builder.loadableNode(AccountObject, {
   name: 'Account',
   description: 'an account / user',
@@ -11,16 +10,13 @@ export const AccountType = builder.loadableNode(AccountObject, {
   },
   fields: (t) => ({
     name: t.exposeString('name'),
-
   }),
   async load(ids) {
     console.log('loadOne', ids);
-    return (await AccountModel.batchGet(ids)).map(r => new AccountObject(r));
+    return (await AccountModel.batchGet(ids)).map((r) => new AccountObject(r));
   },
   loaderOptions: {
     maxBatchSize: 100,
   },
-  sort: obj => obj.id,
+  sort: (obj) => obj.id,
 });
-
-

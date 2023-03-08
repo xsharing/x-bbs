@@ -10,6 +10,4 @@ export const builder = new SchemaBuilder({
     clientMutationId: 'omit',
     cursorType: 'ID',
   },
-  
 });
-

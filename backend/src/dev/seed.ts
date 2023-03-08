@@ -6,14 +6,20 @@ import { AccountModel } from '../models/account';
 dotenv.config();
 
 const seeder = async (): Promise<void> => {
-  await AccountModel.create({
-    id: '355ca11e-bd3e-11ed-92d9-0242ac120003',
-    name: 'Dev Doe',
-  }, {overwrite: true});
-  await AccountModel.create({
-    id: '49cf5c68-bd3e-11ed-8c56-0242ac120003',
-    name: 'Dev Doe',
-  }, {overwrite: true});
+  await AccountModel.create(
+    {
+      id: '355ca11e-bd3e-11ed-92d9-0242ac120003',
+      name: 'Dev Doe',
+    },
+    { overwrite: true },
+  );
+  await AccountModel.create(
+    {
+      id: '49cf5c68-bd3e-11ed-8c56-0242ac120003',
+      name: 'Dev Doe',
+    },
+    { overwrite: true },
+  );
 
   await ThreadModel.create(
     {

@@ -1,5 +1,7 @@
-import { ResolveCursorConnectionArgs, encodeGlobalID, resolveCursorConnection } from '@pothos/plugin-relay';
-import { ThreadItem, ThreadModel, ThreadObject } from '../../models';
+import {
+  encodeGlobalID,
+} from '@pothos/plugin-relay';
+import { ThreadModel, ThreadObject } from '../../models';
 import { builder } from '../builder';
 import { CommentType } from './comment-type';
 import { CommentModel, CommentObject } from '../../models/comment';
@@ -16,14 +18,16 @@ export const ThreadType = builder.loadableNode(ThreadObject, {
     comments: t.field({
       type: [CommentType],
       resolve: async (parent) =>
-        (await CommentModel.scan('threadId').eq(parent.id).exec()).map(r => new CommentObject(r)),
+        (await CommentModel.scan('threadId').eq(parent.id).exec()).map(
+          (r) => new CommentObject(r),
+        ),
     }),
     author: t.field({
       type: AccountType,
       resolve: async (parent, _, context) => {
-        return await AccountType.getDataloader(context).load(parent.authorId)
-      }
-    })
+        return await AccountType.getDataloader(context).load(parent.authorId);
+      },
+    }),
   }),
   async load(ids) {
     console.log('load', ids);
@@ -32,5 +36,5 @@ export const ThreadType = builder.loadableNode(ThreadObject, {
   loaderOptions: {
     maxBatchSize: 100,
   },
-  sort: obj => obj.id,
+  sort: (obj) => obj.id,
 });

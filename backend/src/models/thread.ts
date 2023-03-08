@@ -7,7 +7,7 @@ export class ThreadObject {
   name!: string;
   authorId!: string;
   constructor(item?: ThreadItem) {
-    if (item!=null) {
+    if (item != null) {
       this.id = item.id;
       this.name = item.name;
       this.authorId = item.authorId;
