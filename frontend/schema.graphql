@@ -1,0 +1,60 @@
+"""an account / user"""
+type Account implements Node {
+  id: ID!
+  name: String!
+}
+
+"""a comment"""
+type Comment implements Node {
+  author: Account!
+  body: String!
+  id: ID!
+  threadId: String!
+}
+
+input CreateThreadInput {
+  name: String!
+}
+
+type CreateThreadPayload {
+  success: Boolean!
+}
+
+type Mutation {
+  createThread(input: CreateThreadInput!): CreateThreadPayload!
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  endCursor: ID
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: ID
+}
+
+type Query {
+  node(id: ID!): Node
+  nodes(ids: [ID!]!): [Node]!
+  threads(after: ID, before: ID, first: Int, last: Int): QueryThreadsConnection!
+}
+
+type QueryThreadsConnection {
+  edges: [QueryThreadsConnectionEdge]!
+  pageInfo: PageInfo!
+}
+
+type QueryThreadsConnectionEdge {
+  cursor: ID!
+  node: Thread!
+}
+
+"""a thread"""
+type Thread implements Node {
+  author: Account!
+  comments: [Comment!]!
+  id: ID!
+  name: String
+}

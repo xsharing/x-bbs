@@ -1,0 +1,10 @@
+schema:
+  - http://backend:4002/graphql:
+      headers:
+        apiKey: ANON_KEY
+generates:
+  ./schema.graphql:
+    plugins:
+          - schema-ast
+    config:
+      fetcher: fetch

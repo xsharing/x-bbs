@@ -1,21 +1,22 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { atom, useRecoilValue } from 'recoil';
+import { RecoilRelayEnvironmentProvider } from 'recoil-relay';
+import { exampleQuery, myEnvironmentKey, useMyRelayEnvironment } from './exampleQuery';
 
-function App(): JSX.Element {
+const myAtom = atom({
+  key: 'myAtom',
+  default: 'hello'
+})
+
+function App2(): JSX.Element {
   const [count, setCount] = useState(0);
+  const val = useRecoilValue(myAtom);
+  const gqlVal = useRecoilValue(exampleQuery);
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <h1>Vite + React + Recoil {val} {JSON.stringify(gqlVal)}</h1>
       <div className="card">
         <button onClick={() => { setCount((count) => count + 1); }}>
           count is {count}
@@ -29,6 +30,17 @@ function App(): JSX.Element {
       </p>
     </div>
   );
+}
+
+function App(): JSX.Element {
+  const myEnvironment = useMyRelayEnvironment();
+  return <RecoilRelayEnvironmentProvider
+  environment={myEnvironment}
+  environmentKey={myEnvironmentKey}>
+    <React.Suspense fallback={'.......'}>
+      <App2/>
+    </React.Suspense>
+  </RecoilRelayEnvironmentProvider>
 }
 
 export default App;
