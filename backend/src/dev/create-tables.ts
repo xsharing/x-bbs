@@ -3,6 +3,7 @@ import { ThreadTable } from '../models';
 import { ResourceInUseException } from '@aws-sdk/client-dynamodb';
 import { type Table } from 'dynamoose/dist/Table';
 import { CommentTable } from '../models/comment';
+import { AccountTable } from '../models/account';
 // import dynamoose from 'dynamoose';
 
 dotenv.config();
@@ -23,6 +24,7 @@ const createTable = async (table: Table): Promise<void> => {
 const createTables = async (): Promise<void> => {
   await createTable(ThreadTable);
   await createTable(CommentTable);
+  await createTable(AccountTable);
 };
 
 createTables().catch(console.error);

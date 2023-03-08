@@ -1,3 +1,4 @@
 import './types';
-import './query';
+import './queries';
+import './mutations'
 export * from './builder';

@@ -6,5 +6,8 @@
   "remoteUser": "node",
   "workspaceFolder": "/workspace/backend",
   "overrideCommand": false,
-  "mounts": ["source=../,target=/workspace,type=bind,consistency=cached"]
+  "mounts": [
+    "source=../,target=/workspace,type=bind,consistency=cached",
+    "target=${containerWorkspaceFolder}/node_modules,type=volume"
+  ]
 }

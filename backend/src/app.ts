@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { builder } from './pothos';
 
 dotenv.config();
+(await dynamoose.logger()).providers.set(console);
 
 // TODO: fixme
 dynamoose.aws.ddb.local('http://ddb:8000');
@@ -14,6 +15,7 @@ const yoga = createYoga({
 });
 
 const app = express();
+
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 app.use('/graphql', yoga);
 
