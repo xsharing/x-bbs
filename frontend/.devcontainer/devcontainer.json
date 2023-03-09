@@ -21,7 +21,9 @@
         "GitHub.copilot",
         "kisstkondoros.vscode-codemetrics",
         "streetsidesoftware.code-spell-checker",
-        "rbbit.typescript-hero"
+        "rbbit.typescript-hero",
+        "formulahendry.auto-rename-tag",
+        "meta.relay"
       ]
     }
   }

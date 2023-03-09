@@ -42,7 +42,7 @@ type Query {
 }
 
 type QueryThreadsConnection {
-  edges: [QueryThreadsConnectionEdge]!
+  edges: [QueryThreadsConnectionEdge!]!
   pageInfo: PageInfo!
 }
 

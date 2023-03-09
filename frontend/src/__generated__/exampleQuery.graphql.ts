@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<4aa6daa2dc7dc25b412c190f189efd8f>>
+ * @generated SignedSource<<bd83854058823fe8285dbf804af5c197>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -16,7 +16,7 @@ export type exampleQuery$data = {
       readonly node: {
         readonly name: string | null;
       };
-    } | null>;
+    }>;
   };
 };
 export type exampleQuery = {

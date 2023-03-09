@@ -5,6 +5,8 @@ schema:
 generates:
   ./schema.graphql:
     plugins:
-          - schema-ast
+      - schema-ast
     config:
       fetcher: fetch
+  src/gql/:
+    preset: 'client'

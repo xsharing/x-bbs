@@ -1,0 +1,24 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 100vh;
+}
+
+.layout header {
+    color: white;
+}
+
+.layout main {
+    flex-grow: 1;
+}
+
+.layout footer {
+    height: 3rem;
+    line-height: 1rem;
+    
+    margin-top: auto;
+
+    padding-top: 1rem;
+    padding-left: 1rem;
+}
