@@ -36,6 +36,7 @@ export type CreateThreadInput = {
 export type CreateThreadPayload = {
   __typename?: 'CreateThreadPayload';
   success: Scalars['Boolean'];
+  threadEdge: ThreadEdge;
 };
 
 export type Mutation = {
@@ -104,4 +105,10 @@ export type Thread = Node & {
   comments: Array<Comment>;
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
+};
+
+export type ThreadEdge = {
+  __typename?: 'ThreadEdge';
+  cursor: Scalars['ID'];
+  node: Thread;
 };

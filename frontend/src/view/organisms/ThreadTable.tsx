@@ -11,7 +11,7 @@ const tablePropsSelector = selector({
     const props: TableProps<RecordType> = {
       rowKey: 'id',
       dataSource:
-        get(threadsQuery).map((node) => {
+        get(threadsQuery).nodes.map((node) => {
           return {
             id: node.id,
             name: node?.name,

@@ -44,3 +44,8 @@ export const ThreadType = builder.loadableNode(ThreadObject, {
   },
   sort: (obj) => obj.id,
 });
+
+export const ThreadEdge = builder.edgeObject({
+  name: 'ThreadEdge',
+  type: ThreadType,
+});

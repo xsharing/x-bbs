@@ -18,6 +18,7 @@ input CreateThreadInput {
 
 type CreateThreadPayload {
   success: Boolean!
+  threadEdge: ThreadEdge!
 }
 
 type Mutation {
@@ -57,4 +58,9 @@ type Thread implements Node {
   comments: [Comment!]!
   id: ID!
   name: String
+}
+
+type ThreadEdge {
+  cursor: ID!
+  node: Thread!
 }
