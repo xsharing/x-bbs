@@ -1,4 +1,4 @@
-import { ThreadItem, ThreadModel, ThreadObject } from '../../models';
+import { ThreadModel, ThreadObject } from '../../models';
 import { builder } from '../builder';
 import { v4 as uuidv4 } from 'uuid';
 import { ThreadEdge, ThreadType } from '../types/thread-type';

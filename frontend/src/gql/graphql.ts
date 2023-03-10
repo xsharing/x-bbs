@@ -20,6 +20,17 @@ export type Account = Node & {
   name: Scalars['String'];
 };
 
+export type AddCommentInput = {
+  body: Scalars['String'];
+  threadId: Scalars['ID'];
+};
+
+export type AddCommentPayload = {
+  __typename?: 'AddCommentPayload';
+  commentEdge: CommentEdge;
+  success: Scalars['Boolean'];
+};
+
 /** a comment */
 export type Comment = Node & {
   __typename?: 'Comment';
@@ -27,6 +38,12 @@ export type Comment = Node & {
   body: Scalars['String'];
   id: Scalars['ID'];
   threadId: Scalars['String'];
+};
+
+export type CommentEdge = {
+  __typename?: 'CommentEdge';
+  cursor: Scalars['ID'];
+  node: Comment;
 };
 
 export type CreateThreadInput = {
@@ -41,8 +58,14 @@ export type CreateThreadPayload = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addComment: AddCommentPayload;
   createThread: CreateThreadPayload;
   updateThread: UpdateThreadPayload;
+};
+
+
+export type MutationAddCommentArgs = {
+  input: AddCommentInput;
 };
 
 
@@ -108,9 +131,30 @@ export type QueryThreadsConnectionEdge = {
 export type Thread = Node & {
   __typename?: 'Thread';
   author: Account;
-  comments: Array<Comment>;
+  comments: ThreadCommentsConnection;
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
+};
+
+
+/** a thread */
+export type ThreadCommentsArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+export type ThreadCommentsConnection = {
+  __typename?: 'ThreadCommentsConnection';
+  edges: Array<Maybe<ThreadCommentsConnectionEdge>>;
+  pageInfo: PageInfo;
+};
+
+export type ThreadCommentsConnectionEdge = {
+  __typename?: 'ThreadCommentsConnectionEdge';
+  cursor: Scalars['ID'];
+  node: Comment;
 };
 
 export type ThreadEdge = {

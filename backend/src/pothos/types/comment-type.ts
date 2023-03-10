@@ -33,3 +33,8 @@ export const CommentType = builder.loadableNode(CommentObject, {
   },
   sort: (obj) => obj.id,
 });
+
+export const CommentEdge = builder.edgeObject({
+  name: 'CommentEdge',
+  type: CommentType,
+});

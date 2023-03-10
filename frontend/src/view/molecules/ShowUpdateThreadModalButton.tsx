@@ -1,7 +1,11 @@
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
-export const ShowUpdateThreadModalButton = ({threadId}: {threadId: string}): JSX.Element => {
+export const ShowUpdateThreadModalButton = ({
+  threadId,
+}: {
+  threadId: string;
+}): JSX.Element => {
   const navigate = useNavigate();
   return (
     <Button

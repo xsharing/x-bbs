@@ -1,4 +1,9 @@
-import { decodeGlobalID, encodeGlobalID } from '@pothos/plugin-relay';
+import {
+  decodeGlobalID,
+  encodeGlobalID,
+  resolveArrayConnection,
+  resolveCursorConnection,
+} from '@pothos/plugin-relay';
 import { ThreadModel, ThreadObject } from '../../models';
 import { builder } from '../builder';
 import { CommentType } from './comment-type';
@@ -14,18 +19,16 @@ export const ThreadType = builder.loadableNode(ThreadObject, {
   },
   fields: (t) => ({
     name: t.exposeString('name', { nullable: true }),
-    comments: t.loadableList({
+
+    comments: t.connection({
       type: CommentType,
-      load: async (keys: string[], context) => {
-        const results = await Promise.all(
-          keys.map(
-            async (key) =>
-              (await CommentModel.query('threadId').eq(key).exec()) ?? [],
-          ),
-        );
-        return results.map((r) => r.map((c) => new CommentObject(c)));
-      },
-      resolve: (parent) => parent.id,
+      resolve: async (parent, args) =>
+        resolveArrayConnection(
+          { args },
+          (
+            (await CommentModel.query('threadId').eq(parent.id).exec()) ?? []
+          ).map((r) => new CommentObject(r)),
+        ),
     }),
     author: t.loadable({
       type: AccountType,

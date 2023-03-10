@@ -1,11 +1,14 @@
-import { useMutation, UseMutationConfig } from 'react-relay';
-import { GetRecoilValue } from 'recoil';
+import { useMutation, type UseMutationConfig } from 'react-relay';
+import { type GetRecoilValue } from 'recoil';
 import { graphQLSelector, graphQLSelectorFamily } from 'recoil-relay';
-import { Disposable, graphql, MutationParameters, Variables } from 'relay-runtime';
+import {
+  type Disposable,
+  graphql,
+  type MutationParameters,
+  type Variables,
+} from 'relay-runtime';
 import { myEnvironmentKey } from '../exampleQuery';
-import { Thread } from '../gql/graphql';
-import { threadQuery$data } from './__generated__/threadQuery.graphql';
-import { threadsQuery$data } from './__generated__/threadsQuery.graphql';
+import { type threadQuery$data } from './__generated__/threadQuery.graphql';
 
 export const threadQuery = graphQLSelectorFamily({
   key: 'threadQuery',
@@ -15,9 +18,15 @@ export const threadQuery = graphQLSelectorFamily({
       node(id: $id) {
         id
         ... on Thread {
-            name
-          comments {
-            id
+          name
+          comments(first: 0) @connection(key: "connection__comments") {
+            __id
+            edges {
+              node {
+                id
+                body
+              }
+            }
           }
           author {
             name
@@ -35,11 +44,10 @@ export const threadQuery = graphQLSelectorFamily({
   ) {
     return {
       node: response.node,
+      commentsConnectionId: response.node?.comments?.__id,
     };
   },
 });
-
-
 
 export const useUpdateThreadCommitEvent = (): readonly [
   (config: UseMutationConfig<MutationParameters>) => Disposable,
@@ -47,9 +55,7 @@ export const useUpdateThreadCommitEvent = (): readonly [
 ] => {
   const [commit, isInFlight] = useMutation(
     graphql`
-      mutation threadUpdateThreadMutation(
-        $input: UpdateThreadInput!
-      ) {
+      mutation threadUpdateThreadMutation($input: UpdateThreadInput!) {
         updateThread(input: $input) {
           success
           threadEdge {

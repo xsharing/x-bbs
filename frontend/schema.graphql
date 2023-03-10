@@ -4,12 +4,27 @@ type Account implements Node {
   name: String!
 }
 
+input AddCommentInput {
+  body: String!
+  threadId: ID!
+}
+
+type AddCommentPayload {
+  commentEdge: CommentEdge!
+  success: Boolean!
+}
+
 """a comment"""
 type Comment implements Node {
   author: Account!
   body: String!
   id: ID!
   threadId: String!
+}
+
+type CommentEdge {
+  cursor: ID!
+  node: Comment!
 }
 
 input CreateThreadInput {
@@ -22,6 +37,7 @@ type CreateThreadPayload {
 }
 
 type Mutation {
+  addComment(input: AddCommentInput!): AddCommentPayload!
   createThread(input: CreateThreadInput!): CreateThreadPayload!
   updateThread(input: UpdateThreadInput!): UpdateThreadPayload!
 }
@@ -56,9 +72,19 @@ type QueryThreadsConnectionEdge {
 """a thread"""
 type Thread implements Node {
   author: Account!
-  comments: [Comment!]!
+  comments(after: ID, before: ID, first: Int, last: Int): ThreadCommentsConnection!
   id: ID!
   name: String
+}
+
+type ThreadCommentsConnection {
+  edges: [ThreadCommentsConnectionEdge]!
+  pageInfo: PageInfo!
+}
+
+type ThreadCommentsConnectionEdge {
+  cursor: ID!
+  node: Comment!
 }
 
 type ThreadEdge {

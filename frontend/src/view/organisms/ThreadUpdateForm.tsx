@@ -11,12 +11,15 @@ import {
 interface Data {
   name: string;
 }
-export const ThreadUpdateForm = ({ threadId }: { threadId: string }): JSX.Element => {
+export const ThreadUpdateForm = ({
+  threadId,
+}: {
+  threadId: string;
+}): JSX.Element => {
   const [form] = Form.useForm<Data>();
   const [commit, isInFlight] = useUpdateThreadCommitEvent();
   const navigate = useNavigate();
   const initialData = useRecoilValue(threadQuery(threadId));
-
 
   return (
     <Modal
