@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { GetRecoilValue } from 'recoil';
+import { type GetRecoilValue } from 'recoil';
 import { EnvironmentKey, graphQLSelector } from 'recoil-relay';
 import {
   Environment,
@@ -7,7 +7,7 @@ import {
   Network,
   RecordSource,
   Store,
-  Variables,
+  type Variables,
 } from 'relay-runtime';
 
 async function fetchQuery(
