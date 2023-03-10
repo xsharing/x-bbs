@@ -8,9 +8,9 @@
   "overrideCommand": false,
   "mounts": [
     "source=../,target=/workspace,type=bind,consistency=cached",
-    "target=${containerWorkspaceFolder}/node_modules,type=volume"
+    "source=frontend-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
   ],
-  "onCreateCommand": "chown node node_modules",
+  "onCreateCommand": "sudo chown node node_modules",
   "customizations": {
     "vscode": {
       "extensions": [
