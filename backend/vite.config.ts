@@ -6,7 +6,7 @@ export default defineConfig({
   appType: 'custom',
   server: {
     port: 4002,
-    hmr: true,
+    host: '0.0.0.0',
   },
   plugins: [
     ...VitePluginNode({

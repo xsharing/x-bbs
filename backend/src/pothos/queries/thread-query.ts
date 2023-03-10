@@ -10,6 +10,8 @@ import './query';
 builder.queryFields((t) => ({
   threads: t.connection({
     type: ThreadType,
+    nullable: false,
+    edgesNullable: false,
     resolve: async (_, args) =>
       await resolveCursorConnection(
         {

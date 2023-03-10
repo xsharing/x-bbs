@@ -10,7 +10,7 @@ dotenv.config();
 
 const createTable = async (table: Table): Promise<void> => {
   try {
-    await dynamoose.aws.ddb().deleteTable({ TableName: table.name });
+    // await dynamoose.aws.ddb().deleteTable({ TableName: table.name });
     await table.create();
   } catch (e: unknown) {
     if (e instanceof ResourceInUseException) {
