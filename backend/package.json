@@ -13,7 +13,8 @@
     "fix": "yarn lint --fix",
     "format": "prettier --write \"**/*.+(js|json|yml|ts|tsx)\"",
     "seed": "yarn node  --loader ts-node/esm  --experimental-specifier-resolution=node src/dev/seed.ts",
-    "tables": "yarn node  --loader ts-node/esm  --experimental-specifier-resolution=node src/dev/create-tables.ts"
+    "tables": "yarn node  --loader ts-node/esm  --experimental-specifier-resolution=node src/dev/create-tables.ts",
+    "ddb-admin": "AWS_REGION=ap-northeast-1 AWS_ACCESS_KEY_ID=dummy AWS_SECRET_ACCESS_KEY=dummy DYNAMO_ENDPOINT=http://ddb:8000 dynamodb-admin"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.284.0",
