@@ -42,11 +42,17 @@ export type CreateThreadPayload = {
 export type Mutation = {
   __typename?: 'Mutation';
   createThread: CreateThreadPayload;
+  updateThread: UpdateThreadPayload;
 };
 
 
 export type MutationCreateThreadArgs = {
   input: CreateThreadInput;
+};
+
+
+export type MutationUpdateThreadArgs = {
+  input: UpdateThreadInput;
 };
 
 export type Node = {
@@ -111,4 +117,15 @@ export type ThreadEdge = {
   __typename?: 'ThreadEdge';
   cursor: Scalars['ID'];
   node: Thread;
+};
+
+export type UpdateThreadInput = {
+  id: Scalars['ID'];
+  name: Scalars['String'];
+};
+
+export type UpdateThreadPayload = {
+  __typename?: 'UpdateThreadPayload';
+  success: Scalars['Boolean'];
+  threadEdge: ThreadEdge;
 };

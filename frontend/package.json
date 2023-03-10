@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "lint": "eslint --ext .tsx,.ts src/",
     "fix": "yarn lint --fix",
-    "format": "prettier --write \"**/*.+(js|json|yml|ts|tsx)\""
+    "format": "prettier --write \"**/*.+(js|json|yml|ts|tsx)\"",
+    "relay": "graphql-codegen && relay-compiler"
   },
   "dependencies": {
     "@graphql-codegen/client-preset": "^2.1.1",

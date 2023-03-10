@@ -8,6 +8,7 @@ import { AuthGuard } from './view/organisms/AuthGurad';
 import AuthorizedLayout from './view/templates/AuthorizedLayout';
 import { App as AntdApp } from 'antd';
 import Threads from './view/pages/Threads';
+import { Thread } from './view/pages/Thread';
 
 function App2(): JSX.Element {
   return (
@@ -16,6 +17,7 @@ function App2(): JSX.Element {
         <Route element={<AuthorizedLayout />}>
           <Route path="/" element={<Navigate to={'/threads'} />} />
           <Route path="threads/*" element={<Threads />} />
+          <Route path="thread/:threadId/*" element={<Thread />} />
         </Route>
       </Route>
     </Routes>

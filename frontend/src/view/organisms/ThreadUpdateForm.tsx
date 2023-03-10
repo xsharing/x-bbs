@@ -2,6 +2,7 @@ import { Form, Input, Modal } from 'antd';
 import { ConnectionHandler, type Disposable } from 'react-relay';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
+import { threadQuery, useUpdateThreadCommitEvent } from '../../selector/thread';
 import {
   threadsQuery,
   useCreateThreadCommitEvent,
@@ -10,20 +11,19 @@ import {
 interface Data {
   name: string;
 }
-export const ThreadCreateForm = (): JSX.Element => {
+export const ThreadUpdateForm = ({ threadId }: { threadId: string }): JSX.Element => {
   const [form] = Form.useForm<Data>();
-  const [commit, isInFlight] = useCreateThreadCommitEvent();
+  const [commit, isInFlight] = useUpdateThreadCommitEvent();
   const navigate = useNavigate();
+  const initialData = useRecoilValue(threadQuery(threadId));
 
-  const connectionId = useRecoilValue(threadsQuery).edgesConnectionId;
-  // console.log('connectionId', connectionId);
 
   return (
     <Modal
       open={true}
       destroyOnClose={true}
-      title="Create A New Thread"
-      okText="Create"
+      title={`Update Thread: ${initialData.node?.name}`}
+      okText="Update"
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onOk={async () => {
         const values = await form.validateFields();
@@ -32,8 +32,7 @@ export const ThreadCreateForm = (): JSX.Element => {
         await new Promise((resolve, reject) =>
           commit({
             variables: {
-              input: { name: values.name },
-              connections: [connectionId],
+              input: { name: values.name, id: threadId },
             },
             onCompleted: (response, errors) => {
               console.log('onCompleted', response, errors);

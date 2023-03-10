@@ -1,4 +1,4 @@
-import { encodeGlobalID } from '@pothos/plugin-relay';
+import { decodeGlobalID, encodeGlobalID } from '@pothos/plugin-relay';
 import { ThreadModel, ThreadObject } from '../../models';
 import { builder } from '../builder';
 import { CommentType } from './comment-type';
@@ -10,6 +10,7 @@ export const ThreadType = builder.loadableNode(ThreadObject, {
   description: 'a thread',
   id: {
     resolve: (parent) => encodeGlobalID('Thread', parent.id),
+    parse: (value) => decodeGlobalID(value).id,
   },
   fields: (t) => ({
     name: t.exposeString('name', { nullable: true }),
@@ -37,7 +38,7 @@ export const ThreadType = builder.loadableNode(ThreadObject, {
   }),
   async load(ids) {
     console.log('load', ids);
-    return await ThreadModel.batchGet(ids);
+    return (await ThreadModel.batchGet(ids)).map((r) => new ThreadObject(r));
   },
   loaderOptions: {
     maxBatchSize: 100,
