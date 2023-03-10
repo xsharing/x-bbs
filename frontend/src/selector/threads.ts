@@ -1,6 +1,12 @@
 import { selector, type GetRecoilValue } from 'recoil';
 import { graphQLSelector } from 'recoil-relay';
-import { graphql, type Variables } from 'relay-runtime';
+import { useMutation, type UseMutationConfig } from 'react-relay';
+import {
+  type Disposable,
+  graphql,
+  type MutationParameters,
+  type Variables,
+} from 'relay-runtime';
 import { myEnvironmentKey } from '../exampleQuery';
 import { type threadsQuery$data } from './__generated__/threadsQuery.graphql';
 
@@ -27,3 +33,17 @@ export const threadsQuery = graphQLSelector({
     return response.threads.edges.map((edge) => edge.node);
   },
 });
+
+export const useCreateThreadCommitEvent = (): readonly [
+  (config: UseMutationConfig<MutationParameters>) => Disposable,
+  boolean,
+] => {
+  const [commit, isInFlight] = useMutation(graphql`
+    mutation threadsCreateThreadMutation($input: CreateThreadInput!) {
+      createThread(input: $input) {
+        success
+      }
+    }
+  `);
+  return [commit, isInFlight] as const;
+};
