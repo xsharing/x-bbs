@@ -11,9 +11,13 @@ services:
       context: ..
       dockerfile: ./backend/.devcontainer/Dockerfile
     command: /bin/sh -c "while :; do sleep 10; done"
+    ports:
+      - 4002:4002
   frontend:
     container_name: x-bbs-frontend
     build:
       context: ..
       dockerfile: ./frontend/.devcontainer/Dockerfile
     command: /bin/sh -c "while :; do sleep 10; done"
+    ports:
+      - 5173:5173
