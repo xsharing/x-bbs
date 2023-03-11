@@ -11,6 +11,7 @@ builder.relayMutationField(
     }),
   },
   {
+    authScopes: { authenticated: true },
     resolve: async (root, args, ctx) => {
       const created = await ThreadModel.create({
         id: uuidv4(),

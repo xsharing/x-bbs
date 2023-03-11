@@ -9,6 +9,7 @@ import './query';
 
 builder.queryFields((t) => ({
   threads: t.connection({
+    authScopes: { authenticated: true },
     type: ThreadType,
     nullable: false,
     edgesNullable: false,

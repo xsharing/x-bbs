@@ -11,6 +11,7 @@ import { CommentModel, CommentObject } from '../../models/comment';
 import { AccountType } from './account-types';
 
 export const ThreadType = builder.loadableNode(ThreadObject, {
+  authScopes: { authenticated: true },
   name: 'Thread',
   description: 'a thread',
   id: {

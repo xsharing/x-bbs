@@ -10,6 +10,7 @@ const LoginInput = builder.inputType('LoginInput', {
 
 builder.mutationField('login', (t) =>
   t.field({
+    authScopes: { anyone: true },
     type: AuthJwtToken,
     args: {
       input: t.arg({ type: LoginInput, required: true }),

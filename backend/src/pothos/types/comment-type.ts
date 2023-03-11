@@ -5,6 +5,7 @@ import { builder } from '../builder';
 import { AccountType } from './account-types';
 
 export const CommentType = builder.loadableNode(CommentObject, {
+  authScopes: { authenticated: true },
   name: 'Comment',
   description: 'a comment',
   id: {

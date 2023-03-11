@@ -13,6 +13,7 @@ builder.relayMutationField(
     }),
   },
   {
+    authScopes: { authenticated: true },
     resolve: async (root, args, ctx) => {
       const created = await CommentModel.create({
         id: uuidv4(),

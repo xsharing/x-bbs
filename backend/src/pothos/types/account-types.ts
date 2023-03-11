@@ -3,6 +3,7 @@ import { builder } from '../builder';
 import { AccountModel, AccountObject } from '../../models/account';
 
 export const AccountType = builder.loadableNode(AccountObject, {
+  authScopes: { authenticated: true },
   name: 'Account',
   description: 'an account / user',
   id: {

@@ -6,6 +6,7 @@ import { builder } from './pothos';
 import { buildContext, GraphQLLocalStrategy } from 'graphql-passport';
 import passport from 'passport';
 import { AccountModel } from './models/account';
+import { Strategy as JwtStrategy } from 'passport-jwt';
 
 dotenv.config();
 (await dynamoose.logger()).providers.set(console);
@@ -27,6 +28,21 @@ passport.use(
         .catch((err) => {
           done(err);
         });
+    },
+  ),
+);
+
+passport.use(
+  new JwtStrategy(
+    {
+      secretOrKey: process.env.JWT_SECRET ?? 'dummy',
+      jwtFromRequest: (req) => {
+        return req.headers.authorization?.split(' ')[1] ?? null;
+      },
+    },
+    async function (payload, done) {
+      console.log(payload);
+      done(null, payload);
     },
   ),
 );
