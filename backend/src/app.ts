@@ -18,6 +18,7 @@ passport.use(
   new GraphQLLocalStrategy(
     { passReqToCallback: true },
     (req, email, password, done) => {
+      // console.log('GraphQLLocalStrategy', email);
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       AccountModel.get({
         id: '49cf5c68-bd3e-11ed-8c56-0242ac120003',
@@ -40,7 +41,7 @@ passport.use(
         return req.headers.authorization?.split(' ')[1] ?? null;
       },
     },
-    async function (payload, done) {
+    function (payload, done) {
       console.log(payload);
       done(null, payload);
     },

@@ -4,6 +4,11 @@ import ScopeAuthPlugin from '@pothos/plugin-scope-auth';
 import DataloaderPlugin from '@pothos/plugin-dataloader';
 import { type Jwt, type JwtPayload } from 'jsonwebtoken';
 
+import '@graphql-yoga/node';
+import { YogaInitialContext } from '@graphql-yoga/node';
+import { IncomingMessage, ServerResponse } from 'node:http';
+import { PassportContext } from 'graphql-passport';
+
 SchemaBuilder.allowPluginReRegistration = true;
 
 type BaseType<T extends Record<string, unknown>> = (
@@ -34,9 +39,13 @@ export const builder = new SchemaBuilder<{
       Input: { email: string } & JwtPayload;
     };
   };
-  Context: {
-    authenticate: AuthenticationTypes;
-  };
+  // MEMO: https://the-guild.dev/graphql/yoga-server/docs/features/context#nodejs-standalone-express-and-nextjs-etc
+  Context: YogaInitialContext & {
+    req: IncomingMessage;
+    res: ServerResponse;
+  } & Omit<PassportContext<{ email: string }, {}>, 'authenticate'> & {
+      authenticate: AuthenticationTypes;
+    };
   AuthScopes: {
     anyone: true;
     authenticated: boolean;
@@ -48,6 +57,12 @@ export const builder = new SchemaBuilder<{
     cursorType: 'ID',
   },
   authScopes: async (context) => {
+    if (!context.request.headers.has('Authorization')) {
+      return {
+        anyone: true,
+        authenticated: false,
+      };
+    }
     const verified = await context.authenticate('jwt', {});
     // console.log('authScope', verified);
     return {

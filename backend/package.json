@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.284.0",
+    "@graphql-yoga/node": "^3.7.2",
     "@pothos/core": "^3.27.1",
     "@pothos/plugin-dataloader": "^3.15.0",
     "@pothos/plugin-relay": "^3.37.0",

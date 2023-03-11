@@ -955,6 +955,14 @@
   dependencies:
     tslib "^2.3.1"
 
+"@graphql-yoga/node@^3.7.2":
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/@graphql-yoga/node/-/node-3.7.2.tgz#3936d8c8ff6799f6698e0dd3d507d21284956521"
+  integrity sha512-k+X+qPW4fhrLlwls1c5+hDXWnfurI3uacOi+wfEQJ9nIZ74lVlrlhwVRbQphnbk8i4bi5uFN3V00fTnOE0sT0w==
+  dependencies:
+    graphql-yoga "3.7.2"
+    tslib "^2.3.1"
+
 "@graphql-yoga/subscription@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@graphql-yoga/subscription/-/subscription-3.1.0.tgz#4a0bb0b9db2602d02c68f9828603e1e40329140b"
@@ -2723,7 +2731,7 @@ graphql-passport@^0.6.5:
     subscriptions-transport-ws "^0.11.0"
     ws "7.x || 8.x"
 
-graphql-yoga@^3.7.2:
+graphql-yoga@3.7.2, graphql-yoga@^3.7.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/graphql-yoga/-/graphql-yoga-3.7.2.tgz#e0731c33b10fe51efc273d7c141cdd7fbfbcf516"
   integrity sha512-T7Uxrf2Mc8RTqcSrVz69Fwek4VHwLEhxjgkiX6VVtO76ngWBCp6kNQGmcw06LGQz4PRkhMg9dbM3XAGxfCB73A==
