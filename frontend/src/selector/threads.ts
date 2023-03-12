@@ -9,7 +9,7 @@ import {
   commitMutation,
   ConnectionHandler,
 } from 'relay-runtime';
-import { myEnvironmentKey } from '../exampleQuery';
+import { myEnvironmentKey } from '../graphql';
 import { type threadsQuery$data } from './__generated__/threadsQuery.graphql';
 
 export const threadsQuery = graphQLSelector({

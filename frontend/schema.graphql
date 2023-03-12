@@ -14,6 +14,8 @@ type AddCommentPayload {
   success: Boolean!
 }
 
+scalar AuthJwtToken
+
 """a comment"""
 type Comment implements Node {
   author: Account!
@@ -27,6 +29,17 @@ type CommentEdge {
   node: Comment!
 }
 
+input CreateGroupInput {
+  name: String!
+  visibility: GroupVisibilityEnum!
+}
+
+type CreateGroupPayload {
+  groupEdge: GroupEdge
+  membershipEdge: GroupMembershipEdge
+  success: Boolean!
+}
+
 input CreateThreadInput {
   name: String!
 }
@@ -36,9 +49,81 @@ type CreateThreadPayload {
   threadEdge: ThreadEdge!
 }
 
+"""a Group"""
+type Group implements Node {
+  id: ID!
+  invitations(after: ID, before: ID, first: Int, last: Int): GroupInvitationsConnection!
+  memberships(after: ID, before: ID, first: Int, last: Int): GroupMembershipsConnection!
+  name: String!
+  visibility: GroupVisibilityEnum!
+}
+
+type GroupEdge {
+  cursor: ID!
+  node: Group!
+}
+
+"""a GroupInvitation"""
+type GroupInvitation implements Node {
+  account: Account!
+  id: ID!
+  thread: Thread!
+}
+
+type GroupInvitationEdge {
+  cursor: ID!
+  node: GroupInvitation!
+}
+
+type GroupInvitationsConnection {
+  edges: [GroupInvitationsConnectionEdge]!
+  pageInfo: PageInfo!
+}
+
+type GroupInvitationsConnectionEdge {
+  cursor: ID!
+  node: GroupInvitation!
+}
+
+"""a GroupMembership"""
+type GroupMembership implements Node {
+  account: Account!
+  id: ID!
+  thread: Thread!
+}
+
+type GroupMembershipEdge {
+  cursor: ID!
+  node: GroupMembership!
+}
+
+type GroupMembershipsConnection {
+  edges: [GroupMembershipsConnectionEdge]!
+  pageInfo: PageInfo!
+}
+
+type GroupMembershipsConnectionEdge {
+  cursor: ID!
+  node: GroupMembership!
+}
+
+enum GroupVisibilityEnum {
+  private
+  public
+  secret
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
 type Mutation {
   addComment(input: AddCommentInput!): AddCommentPayload!
+  createGroup(input: CreateGroupInput!): CreateGroupPayload!
   createThread(input: CreateThreadInput!): CreateThreadPayload!
+  login(input: LoginInput!): AuthJwtToken!
+  updateGroup(input: UpdateGroupInput!): UpdateGroupPayload!
   updateThread(input: UpdateThreadInput!): UpdateThreadPayload!
 }
 
@@ -90,6 +175,17 @@ type ThreadCommentsConnectionEdge {
 type ThreadEdge {
   cursor: ID!
   node: Thread!
+}
+
+input UpdateGroupInput {
+  id: ID!
+  name: String!
+  visibility: GroupVisibilityEnum!
+}
+
+type UpdateGroupPayload {
+  groupEdge: GroupEdge!
+  success: Boolean!
 }
 
 input UpdateThreadInput {

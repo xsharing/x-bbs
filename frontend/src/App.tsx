@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import { atom, useRecoilValue } from 'recoil';
 import { RecoilRelayEnvironmentProvider } from 'recoil-relay';
-import { myEnvironmentKey, useMyRelayEnvironment } from './exampleQuery';
+import { myEnvironmentKey, useMyRelayEnvironment } from './graphql';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { AuthGuard } from './view/organisms/AuthGurad';
 import AuthorizedLayout from './view/templates/AuthorizedLayout';
 import { App as AntdApp } from 'antd';
 import Threads from './view/pages/Threads';
 import { Thread } from './view/pages/Thread';
+import Login from './view/pages/Login';
 
 function App2(): JSX.Element {
   return (
@@ -20,6 +20,8 @@ function App2(): JSX.Element {
           <Route path="thread/:threadId/*" element={<Thread />} />
         </Route>
       </Route>
+
+      <Route path="login" element={<Login />} />
     </Routes>
   );
 }

@@ -1,3 +1,12 @@
+import { Card } from 'antd';
+import { LoginForm } from '../organisms/LoginForm';
+
 export default function Login(): JSX.Element {
-  return <div>login</div>;
+  return (
+    <main>
+      <Card title="Login">
+        <LoginForm />
+      </Card>
+    </main>
+  );
 }

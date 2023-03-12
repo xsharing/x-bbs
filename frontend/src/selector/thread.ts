@@ -7,7 +7,7 @@ import {
   type MutationParameters,
   type Variables,
 } from 'relay-runtime';
-import { myEnvironmentKey } from '../exampleQuery';
+import { myEnvironmentKey } from '../graphql';
 import { type threadQuery$data } from './__generated__/threadQuery.graphql';
 
 export const threadQuery = graphQLSelectorFamily({

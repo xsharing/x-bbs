@@ -11,6 +11,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  AuthJwtToken: any;
 };
 
 /** an account / user */
@@ -46,6 +47,18 @@ export type CommentEdge = {
   node: Comment;
 };
 
+export type CreateGroupInput = {
+  name: Scalars['String'];
+  visibility: GroupVisibilityEnum;
+};
+
+export type CreateGroupPayload = {
+  __typename?: 'CreateGroupPayload';
+  groupEdge?: Maybe<GroupEdge>;
+  membershipEdge?: Maybe<GroupMembershipEdge>;
+  success: Scalars['Boolean'];
+};
+
 export type CreateThreadInput = {
   name: Scalars['String'];
 };
@@ -56,10 +69,110 @@ export type CreateThreadPayload = {
   threadEdge: ThreadEdge;
 };
 
+/** a Group */
+export type Group = Node & {
+  __typename?: 'Group';
+  id: Scalars['ID'];
+  invitations: GroupInvitationsConnection;
+  memberships: GroupMembershipsConnection;
+  name: Scalars['String'];
+  visibility: GroupVisibilityEnum;
+};
+
+
+/** a Group */
+export type GroupInvitationsArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** a Group */
+export type GroupMembershipsArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+export type GroupEdge = {
+  __typename?: 'GroupEdge';
+  cursor: Scalars['ID'];
+  node: Group;
+};
+
+/** a GroupInvitation */
+export type GroupInvitation = Node & {
+  __typename?: 'GroupInvitation';
+  account: Account;
+  id: Scalars['ID'];
+  thread: Thread;
+};
+
+export type GroupInvitationEdge = {
+  __typename?: 'GroupInvitationEdge';
+  cursor: Scalars['ID'];
+  node: GroupInvitation;
+};
+
+export type GroupInvitationsConnection = {
+  __typename?: 'GroupInvitationsConnection';
+  edges: Array<Maybe<GroupInvitationsConnectionEdge>>;
+  pageInfo: PageInfo;
+};
+
+export type GroupInvitationsConnectionEdge = {
+  __typename?: 'GroupInvitationsConnectionEdge';
+  cursor: Scalars['ID'];
+  node: GroupInvitation;
+};
+
+/** a GroupMembership */
+export type GroupMembership = Node & {
+  __typename?: 'GroupMembership';
+  account: Account;
+  id: Scalars['ID'];
+  thread: Thread;
+};
+
+export type GroupMembershipEdge = {
+  __typename?: 'GroupMembershipEdge';
+  cursor: Scalars['ID'];
+  node: GroupMembership;
+};
+
+export type GroupMembershipsConnection = {
+  __typename?: 'GroupMembershipsConnection';
+  edges: Array<Maybe<GroupMembershipsConnectionEdge>>;
+  pageInfo: PageInfo;
+};
+
+export type GroupMembershipsConnectionEdge = {
+  __typename?: 'GroupMembershipsConnectionEdge';
+  cursor: Scalars['ID'];
+  node: GroupMembership;
+};
+
+export enum GroupVisibilityEnum {
+  Private = 'private',
+  Public = 'public',
+  Secret = 'secret'
+}
+
+export type LoginInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addComment: AddCommentPayload;
+  createGroup: CreateGroupPayload;
   createThread: CreateThreadPayload;
+  login: Scalars['AuthJwtToken'];
+  updateGroup: UpdateGroupPayload;
   updateThread: UpdateThreadPayload;
 };
 
@@ -69,8 +182,23 @@ export type MutationAddCommentArgs = {
 };
 
 
+export type MutationCreateGroupArgs = {
+  input: CreateGroupInput;
+};
+
+
 export type MutationCreateThreadArgs = {
   input: CreateThreadInput;
+};
+
+
+export type MutationLoginArgs = {
+  input: LoginInput;
+};
+
+
+export type MutationUpdateGroupArgs = {
+  input: UpdateGroupInput;
 };
 
 
@@ -161,6 +289,18 @@ export type ThreadEdge = {
   __typename?: 'ThreadEdge';
   cursor: Scalars['ID'];
   node: Thread;
+};
+
+export type UpdateGroupInput = {
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  visibility: GroupVisibilityEnum;
+};
+
+export type UpdateGroupPayload = {
+  __typename?: 'UpdateGroupPayload';
+  groupEdge: GroupEdge;
+  success: Scalars['Boolean'];
 };
 
 export type UpdateThreadInput = {
