@@ -9,13 +9,15 @@ import { App as AntdApp } from 'antd';
 import Threads from './view/pages/Threads';
 import { Thread } from './view/pages/Thread';
 import Login from './view/pages/Login';
+import Groups from './view/pages/Groups';
 
 function App2(): JSX.Element {
   return (
     <Routes>
       <Route element={<AuthGuard />}>
         <Route element={<AuthorizedLayout />}>
-          <Route path="/" element={<Navigate to={'/threads'} />} />
+          <Route path="/" element={<Navigate to={'/groups'} />} />
+          <Route path="groups/*" element={<Groups />} />
           <Route path="threads/*" element={<Threads />} />
           <Route path="thread/:threadId/*" element={<Thread />} />
         </Route>

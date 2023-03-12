@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { useLoginCommitEvent } from '../../selector/auth';
 
 interface FormFields {
-    email: string;
-    password: string;
+  email: string;
+  password: string;
 }
 
 export const LoginForm = (): JSX.Element => {
@@ -16,24 +16,35 @@ export const LoginForm = (): JSX.Element => {
   const navigate = useNavigate();
   const [loginMutation, isInFlight] = useLoginCommitEvent();
 
-  const login = useCallback((data: FormFields) => {
-    loginMutation({variables: { input: data}, onCompleted: (data) => {
-      console.log('loginMutation.onCompleted', data);
-      authorizationTokenSetter(data.login);
-      navigate('/');
-    }
-  });
-  }, [authorizationTokenSetter, navigate, loginMutation]);
+  const login = useCallback(
+    (data: FormFields) => {
+      loginMutation({
+        variables: { input: data },
+        onCompleted: (data) => {
+          console.log('loginMutation.onCompleted', data);
+          authorizationTokenSetter(data.login);
+          navigate('/');
+        },
+      });
+    },
+    [authorizationTokenSetter, navigate, loginMutation],
+  );
 
   return (
-    <Form form={form} onFinish={login}>
+    <Form
+      form={form}
+      onFinish={login}
+      initialValues={{ email: 'a@a.com', password: 'p' }}
+    >
       <Form.Item label="email" name="email">
         <Input type="email" />
       </Form.Item>
       <Form.Item label="password" name="password">
         <Input type="password" />
       </Form.Item>
-      <Button htmlType="submit" loading={isInFlight}>Login</Button>
+      <Button htmlType="submit" loading={isInFlight}>
+        Login
+      </Button>
     </Form>
   );
 };

@@ -220,9 +220,18 @@ export type PageInfo = {
 
 export type Query = {
   __typename?: 'Query';
+  groups: QueryGroupsConnection;
   node?: Maybe<Node>;
   nodes: Array<Maybe<Node>>;
   threads: QueryThreadsConnection;
+};
+
+
+export type QueryGroupsArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -241,6 +250,18 @@ export type QueryThreadsArgs = {
   before?: InputMaybe<Scalars['ID']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
+};
+
+export type QueryGroupsConnection = {
+  __typename?: 'QueryGroupsConnection';
+  edges: Array<QueryGroupsConnectionEdge>;
+  pageInfo: PageInfo;
+};
+
+export type QueryGroupsConnectionEdge = {
+  __typename?: 'QueryGroupsConnectionEdge';
+  cursor: Scalars['ID'];
+  node: Group;
 };
 
 export type QueryThreadsConnection = {

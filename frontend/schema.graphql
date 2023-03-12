@@ -139,9 +139,20 @@ type PageInfo {
 }
 
 type Query {
+  groups(after: ID, before: ID, first: Int, last: Int): QueryGroupsConnection!
   node(id: ID!): Node
   nodes(ids: [ID!]!): [Node]!
   threads(after: ID, before: ID, first: Int, last: Int): QueryThreadsConnection!
+}
+
+type QueryGroupsConnection {
+  edges: [QueryGroupsConnectionEdge!]!
+  pageInfo: PageInfo!
+}
+
+type QueryGroupsConnectionEdge {
+  cursor: ID!
+  node: Group!
 }
 
 type QueryThreadsConnection {
