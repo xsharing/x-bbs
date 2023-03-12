@@ -1,5 +1,11 @@
 # x-bbs
 
+## Caution
+
+This project is very experimental.
+There are a lot of issues I'm aware of.
+Not for production, not to be public.
+
 ## About this Project
 
 This is an BBS for small-medium sized groups.
@@ -15,4 +21,3 @@ Architecture decisions are made to experiment relatively new technologies and li
 ### open projects in VS Code
 
 Open `{frontend, backend, aws}` folders in VS Code separately and run them in Dev Container.
-
